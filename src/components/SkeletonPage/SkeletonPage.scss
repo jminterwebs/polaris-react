@@ -32,6 +32,25 @@ $action-text-spacing: rem(24px);
   margin-bottom: (-1 * spacing(extra-tight));
 }
 
+.TitleAndPrimaryAction {
+  display: flex;
+}
+.Title {
+  flex: 1 1 0%;
+}
+
+.PrimaryAction {
+  align-self: stretch;
+  align-items: center;
+  margin-right: spacing(extra-tight);
+  margin-bottom: (-1 * spacing(extra-tight));
+
+  > * {
+    height: rem(36px);
+    width: 65px;
+  }
+}
+
 .Actions {
   @include skeleton-page-secondary-actions-layout;
 }
