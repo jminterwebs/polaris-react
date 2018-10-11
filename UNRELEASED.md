@@ -6,7 +6,7 @@ Use [the changelog guidelines](https://git.io/polaris-changelog-guidelines) to f
 
 ### Enhancements
 
-- Removed tip from `Popover` ([#1845](https://github.com/Shopify/polaris-react/pull/1845))
+- Added primaryAction prop to `SkeletonPage` ([#2416](https://github.com/Shopify/polaris-react/pull/2416)) (thanks [@calebstdenis](https://github.com/calebstdenis) for the [original request](https://github.com/Shopify/polaris/issues/443))
 
 ### Bug fixes
 
