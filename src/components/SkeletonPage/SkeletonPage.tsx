@@ -47,14 +47,13 @@ export class SkeletonPage extends React.PureComponent<CombinedProps, never> {
     const headerClassName = classNames(
       styles.Header,
       breadcrumbs && styles['Header-hasBreadcrumbs'],
-      primaryAction && styles['Header-hasPrimaryAction'],
       secondaryActions && styles['Header-hasSecondaryActions'],
     );
 
     const titleMarkup = title !== null ? renderTitle(title) : null;
 
     const primaryActionMarkup = primaryAction ? (
-      <div className={styles.PrimaryAction} style={{width: 60}}>
+      <div className={styles.PrimaryAction} testID="PrimaryAction">
         <SkeletonDisplayText size="large" />
       </div>
     ) : null;
@@ -111,7 +110,11 @@ function renderTitle(title: string) {
         {title}
       </DisplayText>
     );
-  return <div className={styles.Title}>{titleContent}</div>;
+  return (
+    <div className={styles.Title} testID="TitleWrapper">
+      {titleContent}
+    </div>
+  );
 }
 
 export default withAppProvider<Props>()(SkeletonPage);
