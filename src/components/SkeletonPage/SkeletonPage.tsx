@@ -47,6 +47,7 @@ export class SkeletonPage extends React.PureComponent<CombinedProps, never> {
     const headerClassName = classNames(
       styles.Header,
       breadcrumbs && styles['Header-hasBreadcrumbs'],
+      primaryAction && styles['Header-hasPrimaryAction'],
       secondaryActions && styles['Header-hasSecondaryActions'],
     );
 

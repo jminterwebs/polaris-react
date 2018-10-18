@@ -36,7 +36,7 @@ $action-text-spacing: rem(24px);
   display: flex;
 }
 
-.Title {
+<<<<<<< HEAD=======>>>>>>>d4be0ea7430f5dc8093a595e6db6aa348f3a41c5 .Title {
   flex: 1 1 0%;
 }
 
@@ -46,9 +46,9 @@ $action-text-spacing: rem(24px);
   margin-right: spacing(extra-tight);
   margin-bottom: (-1 * spacing(extra-tight));
 
-  > * {
+  >* {
     height: rem(36px);
-   min-width: rem(100px);
+    min-width: rem(100px);
   }
 }
 
