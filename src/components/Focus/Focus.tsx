@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import isEqual from 'lodash/isEqual';
 import {focusFirstFocusableNode} from '@shopify/javascript-utilities/focus';
 import {write} from '@shopify/javascript-utilities/fastdom';
 
@@ -10,6 +11,20 @@ export interface Props {
 
 export default class Focus extends React.PureComponent<Props, never> {
   componentDidMount() {
+    this.handleSelfFocus();
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const {children, ...restProps} = this.props;
+    const {children: prevChildren, ...restPrevProps} = prevProps;
+    if (isEqual(restProps, restPrevProps)) {
+      return;
+    }
+
+    this.handleSelfFocus();
+  }
+
+  handleSelfFocus() {
     if (this.props.disabled) {
       return;
     }

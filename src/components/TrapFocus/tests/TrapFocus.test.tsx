@@ -1,9 +1,22 @@
 import * as React from 'react';
 import {mountWithAppProvider} from 'tests/utilities';
-import {Focus} from 'components';
+import {Focus, TextField} from 'components';
+import {noop} from '@shopify/javascript-utilities/other';
 import TrapFocus from '../TrapFocus';
 
 describe('<TrapFocus />', () => {
+  let requestAnimationFrameSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    requestAnimationFrameSpy = jest.spyOn(window, 'requestAnimationFrame');
+    requestAnimationFrameSpy.mockImplementation((cb) => cb());
+  });
+
+  afterEach(() => {
+    (document.activeElement as HTMLElement).blur();
+    requestAnimationFrameSpy.mockRestore();
+  });
+
   it('mounts', () => {
     const trapFocus = mountWithAppProvider(
       <TrapFocus>
@@ -19,7 +32,6 @@ describe('<TrapFocus />', () => {
         <div />
       </TrapFocus>,
     ).find(Focus);
-
     expect(focus.prop('disabled')).toBe(false);
   });
 
@@ -41,5 +53,29 @@ describe('<TrapFocus />', () => {
     ).find(Focus);
 
     expect(focus.prop('disabled')).toBe(false);
+  });
+
+  it('keeps focus on nodes contained inside trap focus during mount', () => {
+    const trapFocus = mountWithAppProvider(
+      <TrapFocus>
+        <TextField label="" value="" onChange={noop} autoFocus />
+      </TrapFocus>,
+    );
+    const input = trapFocus.find('input').getDOMNode();
+    expect(document.activeElement).toBe(input);
+  });
+
+  it('focuses the first focused node when nodes contained in trap focus are not in focus', () => {
+    const focusedElement = mountWithAppProvider(
+      <TrapFocus>
+        <a href="/">
+          <TextField label="" value="" onChange={noop} />
+        </a>
+      </TrapFocus>,
+    )
+      .find('a')
+      .getDOMNode();
+
+    expect(document.activeElement).toBe(focusedElement);
   });
 });
